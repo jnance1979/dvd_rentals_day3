@@ -16,12 +16,6 @@ where amount > 6.99
 group by payment.customer_id, first_name, last_name, amount
 
 -- ####  #3  ####
---select customer_id, sub.totes from
---(select customer_id, sum(amount) as totes
---from payment
---group by customer_id) sub           returns amounts, but no names (before join)
---where totes > 175
---group by customer_id, sub.totes
 
 select customer_id, first_name, last_name, sub.totes from
 (select payment.customer_id, first_name, last_name, sum(amount) as totes
@@ -50,16 +44,13 @@ order by count desc
 limit 1;
 
 -- ####  #6  ####
+
 select rating, count(film_id)
 from film
 group by rating
 ORDER BY count DESC 
 
 -- ####  #7  ####
-
-select customer_id, amount 
-from payment
-order by customer_id 
 
 select distinct customer_id, first_name, last_name 
 from
@@ -69,15 +60,6 @@ join customer on payment.customer_id = customer.customer_id
 where amount > 6.99) sub
 group by customer_id, first_name, last_name 
 having count(*) = 1
-
-
---select distinct customer_id
---from
---(select customer_id, amount
---from payment
---where amount > 6.99) sub
---group by customer_id
---having count(*) = 1
 
 -- ####  #8  ####
 
